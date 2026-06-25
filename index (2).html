@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSNL Bharat Fiber — Plan Selector</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <span class="logo-pill">BSNL</span>
+  <h1>Bharat Fiber — Plan Selector</h1>
+  <p>Kerala Circle &nbsp;·&nbsp; GPON Analysis</p>
+</header>
+
+<div class="container">
+
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-step active" data-step="1"><span class="step-num">Step 1</span>Streaming</div>
+    <div class="progress-step" data-step="2"><span class="step-num">Step 2</span>Work & Gaming</div>
+    <div class="progress-step" data-step="3"><span class="step-num">Step 3</span>Smart Home</div>
+    <div class="progress-step" data-step="4"><span class="step-num">Step 4</span>Background</div>
+    <div class="progress-step" data-step="5"><span class="step-num">Step 5</span>Your Plan</div>
+  </div>
+
+  <div class="section active" id="step1">
+    <div class="card">
+      <div class="card-title"><div class="card-icon">📺</div> Video Streaming</div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:1rem;">Tell us how many screens stream video at the same time in your home.</p>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">HD streams (1080p — Netflix / YouTube)</div>
+          <div class="usage-sub">5 Mbps per screen</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('hd',-1)">−</button>
+          <div class="counter-val" id="hd-val">0</div>
+          <button class="counter-btn" onclick="change('hd',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">4K UHD streams (Netflix / Prime 4K)</div>
+          <div class="usage-sub">25 Mbps per screen</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('uhd',-1)">−</button>
+          <div class="counter-val" id="uhd-val">0</div>
+          <button class="counter-btn" onclick="change('uhd',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Live streaming / live sports (HD)</div>
+          <div class="usage-sub">10 Mbps per screen — cannot buffer</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('live',-1)">−</button>
+          <div class="counter-val" id="live-val">0</div>
+          <button class="counter-btn" onclick="change('live',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <div></div>
+      <button class="btn-primary" onclick="goStep(2)">Next →</button>
+    </div>
+  </div>
+
+  <div class="section" id="step2">
+    <div class="card">
+      <div class="card-title"><div class="card-icon">💼</div> Work From Home & Gaming</div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:1rem;">Count simultaneous users, not total people in the house.</p>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Video calls / WFH / online classes</div>
+          <div class="usage-sub">5 Mbps per person (Zoom / Meet / Teams)</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('wfh',-1)">−</button>
+          <div class="counter-val" id="wfh-val">0</div>
+          <button class="counter-btn" onclick="change('wfh',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Online gaming sessions</div>
+          <div class="usage-sub">5 Mbps per session — low latency critical</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('gaming',-1)">−</button>
+          <div class="counter-val" id="gaming-val">0</div>
+          <button class="counter-btn" onclick="change('gaming',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Large file / movie downloads</div>
+          <div class="usage-sub">15 Mbps per session</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('downloads',-1)">−</button>
+          <div class="counter-val" id="downloads-val">0</div>
+          <button class="counter-btn" onclick="change('downloads',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-secondary" onclick="goStep(1)">← Back</button>
+      <button class="btn-primary" onclick="goStep(3)">Next →</button>
+    </div>
+  </div>
+
+  <div class="section" id="step3">
+    <div class="card">
+      <div class="card-title"><div class="card-icon">🏠</div> Smart Home & Devices</div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:1rem;">Count all connected devices — these run silently in the background.</p>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Smart home / IoT devices</div>
+          <div class="usage-sub">0.5 Mbps each — bulbs, sensors, assistants</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('iot',-1)">−</button>
+          <div class="counter-val" id="iot-val">0</div>
+          <button class="counter-btn" onclick="change('iot',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Security / CCTV cameras (cloud upload)</div>
+          <div class="usage-sub">2 Mbps each — continuous 1080p upload</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('cctv',-1)">−</button>
+          <div class="counter-val" id="cctv-val">0</div>
+          <button class="counter-btn" onclick="change('cctv',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Cloud sync / backup devices</div>
+          <div class="usage-sub">3 Mbps each — Google Photos, OneDrive</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('cloud',-1)">−</button>
+          <div class="counter-val" id="cloud-val">0</div>
+          <button class="counter-btn" onclick="change('cloud',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-secondary" onclick="goStep(2)">← Back</button>
+      <button class="btn-primary" onclick="goStep(4)">Next →</button>
+    </div>
+  </div>
+
+  <div class="section" id="step4">
+    <div class="card">
+      <div class="card-title"><div class="card-icon">🎵</div> Browsing & Background Usage</div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:1rem;">How many devices are browsing or listening at the same time?</p>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Browsing / social media / WhatsApp</div>
+          <div class="usage-sub">2 Mbps per device</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('browsing',-1)">−</button>
+          <div class="counter-val" id="browsing-val">0</div>
+          <button class="counter-btn" onclick="change('browsing',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Music / audio streaming</div>
+          <div class="usage-sub">0.3 Mbps per device — Spotify / Gaana</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('music',-1)">−</button>
+          <div class="counter-val" id="music-val">0</div>
+          <button class="counter-btn" onclick="change('music',1)">+</button>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div>
+          <div class="usage-label">Finance / stock trading apps</div>
+          <div class="usage-sub">1 Mbps per device — real-time feeds</div>
+        </div>
+        <div class="counter">
+          <button class="counter-btn" onclick="change('finance',-1)">−</button>
+          <div class="counter-val" id="finance-val">0</div>
+          <button class="counter-btn" onclick="change('finance',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-secondary" onclick="goStep(3)">← Back</button>
+      <button class="btn-primary" onclick="calculate()">Calculate My Plan →</button>
+    </div>
+  </div>
+
+  <div class="section" id="step5">
+    <div id="resultContent"></div>
+    <div class="nav-row" style="margin-top:0;">
+      <button class="btn-secondary" onclick="goStep(4)">← Edit</button>
+      <button class="btn-primary" onclick="reset()">Start Over</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
